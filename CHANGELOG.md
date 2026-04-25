@@ -96,7 +96,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - README.md with project overview and features
 - DEPLOYMENT.md with detailed deployment guides
 - QUICKSTART.md for fast deployment
-- GITHUB_SETUP.md for GitHub setup
 - CHANGELOG.md for release tracking
 - Environment variable template (.env.example)
 
