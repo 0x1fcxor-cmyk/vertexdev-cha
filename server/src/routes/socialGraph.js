@@ -147,18 +147,11 @@ router.get('/user/:userId/recommendations', async (req, res) => {
     });
 
     // Recommendation 3: Similar users (based on activity patterns)
+    const similarLimit = Math.max(5, limit - 10);
     const similarUsersResult = await pool.query(
-      `SELECT 
-        u.id,
-        u.username,
-        u.avatar_url
-       FROM users u
-       WHERE u.id != $1
-       AND u.id NOT IN (SELECT friend_id FROM friends WHERE user_id = $1)
-       ORDER BY RANDOM()
-       LIMIT $2`,
-      [userId, Math.max(5, limit - 10)]
-    });
+      `SELECT u.id, u.username, u.avatar_url FROM users u WHERE u.id != $1 AND u.id NOT IN (SELECT friend_id FROM friends WHERE user_id = $1) ORDER BY RANDOM() LIMIT $2`,
+      [userId, similarLimit]
+    );
 
     if (similarUsersResult.rows.length > 0) {
       recommendations.push({

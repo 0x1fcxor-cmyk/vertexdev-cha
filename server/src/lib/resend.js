@@ -1,4 +1,4 @@
-import Resend from 'resend';
+import { Resend } from 'resend';
 
 /**
  * Resend email service integration
@@ -6,7 +6,13 @@ import Resend from 'resend';
  */
 class ResendEmailService {
   constructor() {
-    this.resend = new Resend(process.env.RESEND_API_KEY);
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      console.warn('RESEND_API_KEY not set. Email features will be disabled.');
+      this.resend = null;
+    } else {
+      this.resend = new Resend(apiKey);
+    }
     this.fromEmail = process.env.RESEND_FROM_EMAIL || 'noreply@vertexdev.chat';
     this.fromName = process.env.RESEND_FROM_NAME || 'VertexDev Chat';
   }

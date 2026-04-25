@@ -1,9 +1,9 @@
 import OpenAI from 'openai';
 
 // Initialize OpenAI client
-const openai = new OpenAI({
+const openai = process.env.OPENAI_API_KEY ? new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
-});
+}) : null;
 
 // AI Chatbot system
 export class AIChatbot {

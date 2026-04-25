@@ -3,7 +3,7 @@ import OpenAI from 'openai';
 import { getPool } from '../database/connection.js';
 
 const router = express.Router();
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const openai = process.env.OPENAI_API_KEY ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY }) : null;
 
 // Generate embedding for text
 async function generateEmbedding(text) {
