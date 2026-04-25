@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
+  base: process.env.NODE_ENV === 'production' ? '/vertexdev-cha/' : '/',
   server: {
     port: 5173,
     proxy: {
@@ -14,6 +15,19 @@ export default defineConfig({
         target: 'http://localhost:3001',
         changeOrigin: true,
         ws: true
+      }
+    }
+  },
+  build: {
+    outDir: 'dist',
+    sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'socket-vendor': ['socket.io-client'],
+          'ui-vendor': ['lucide-react']
+        }
       }
     }
   }

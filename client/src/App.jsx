@@ -6,6 +6,7 @@ import Login from './components/Login';
 import MainLayout from './components/MainLayout';
 import TitleBar from './components/TitleBar';
 import WebSocketDebugPanel from './components/WebSocketDebugPanel';
+import NotificationSystem from './components/NotificationSystem';
 
 function App() {
   const { user, token, setUser, setToken, setServers, setCurrentServer, setCurrentChannel, logout } = useStore();
@@ -145,6 +146,7 @@ function App() {
         <TitleBar />
         <Login onLogin={handleLogin} onRegister={handleRegister} />
         <WebSocketDebugPanel />
+        <NotificationSystem />
       </>
     );
   }
@@ -154,6 +156,7 @@ function App() {
       <TitleBar />
       <MainLayout onLogout={handleLogout} />
       <WebSocketDebugPanel />
+      <NotificationSystem />
     </>
   );
 }
