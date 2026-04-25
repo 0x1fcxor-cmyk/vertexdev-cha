@@ -1,36 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="description" content="LightChat - Real-time Discord-like chat application" />
-    <meta name="theme-color" content="#5865f2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="description" content="VertexDev Chat - Production-ready real-time messaging platform with dark theme, green accents, robust WebSocket, and comprehensive features" />
+    <meta name="keywords" content="chat, messaging, real-time, websocket, discord, slack, vertexdev, green theme, dark mode" />
+    <meta name="author" content="VertexDev" />
+    <meta name="theme-color" content="#22c55e" />
+    <meta name="msapplication-TileColor" content="#22c55e" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vertexdev.chat/" />
+    <meta property="og:title" content="VertexDev Chat - Real-time Messaging Platform" />
+    <meta property="og:description" content="Production-ready real-time messaging platform with dark theme, green accents, robust WebSocket, and comprehensive features" />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://vertexdev.chat/" />
+    <meta name="twitter:title" content="VertexDev Chat - Real-time Messaging Platform" />
+    <meta name="twitter:description" content="Production-ready real-time messaging platform with dark theme, green accents, robust WebSocket, and comprehensive features" />
+    <meta name="twitter:image" content="/twitter-image.png" />
+    
+    <!-- Apple Mobile Web App -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="apple-mobile-web-app-title" content="VertexDev Chat" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+    
+    <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json" />
-    <title>VertexDev Chat - Real-time Chat</title>
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://vertexdev.chat/" />
     
     <!-- Preconnect to improve performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://api.resend.com">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="https://api.resend.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    
+    <title>VertexDev Chat - Real-time Messaging Platform</title>
     
     <!-- Meta tags for Electron -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' ws: wss: http: https:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: http:; connect-src 'self' ws: wss: http: https:; font-src 'self' https:; media-src 'self' https:; object-src 'none'; frame-src 'self'; base-uri 'self'; form-action 'self';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     
     <style>
+      /* ========================================
+         BASE STYLES
+         ======================================== */
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
       
+      html {
+        font-size: 16px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+      
       body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
         background: #0a0a0a;
         color: #e0e0e0;
         overflow: hidden;
@@ -38,8 +102,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        line-height: 1.5;
       }
       
+      /* ========================================
+         LOADING SCREEN STYLES
+         ======================================== */
       #loading-screen {
         display: flex;
         flex-direction: column;
@@ -47,59 +115,154 @@
         justify-content: center;
         gap: 2rem;
         animation: fadeIn 0.3s ease-in;
+        padding: 2rem;
+        text-align: center;
       }
       
       @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
+        from { 
+          opacity: 0; 
+          transform: translateY(10px); 
+        }
+        to { 
+          opacity: 1; 
+          transform: translateY(0); 
+        }
       }
       
       .logo {
         width: 120px;
         height: 120px;
-        background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+        background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
         border-radius: 24px;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 32px;
-        font-weight: bold;
+        font-weight: 800;
         color: white;
-        box-shadow: 0 8px 32px rgba(34, 197, 94, 0.3);
+        box-shadow: 0 8px 32px rgba(34, 197, 94, 0.3), 0 0 60px rgba(34, 197, 94, 0.2);
         animation: pulse 2s ease-in-out infinite;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .logo::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+        animation: shine 3s ease-in-out infinite;
+      }
+      
+      @keyframes shine {
+        0% {
+          transform: translateX(-100%);
+        }
+        50%, 100% {
+          transform: translateX(100%);
+        }
       }
       
       @keyframes pulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.05); }
+        0%, 100% { 
+          transform: scale(1); 
+          box-shadow: 0 8px 32px rgba(34, 197, 94, 0.3), 0 0 60px rgba(34, 197, 94, 0.2);
+        }
+        50% { 
+          transform: scale(1.05); 
+          box-shadow: 0 12px 40px rgba(34, 197, 94, 0.4), 0 0 80px rgba(34, 197, 94, 0.3);
+        }
       }
       
       .loading-text {
         font-size: 24px;
-        font-weight: 600;
+        font-weight: 700;
         color: #fff;
+        letter-spacing: -0.5px;
+        animation: slideUp 0.5s ease-out 0.2s both;
+      }
+      
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
       
       .loading-subtext {
         font-size: 14px;
         color: #8e9297;
+        font-weight: 500;
+        animation: slideUp 0.5s ease-out 0.3s both;
+      }
+      
+      .loading-progress {
+        width: 200px;
+        height: 4px;
+        background: #1a1a1a;
+        border-radius: 2px;
+        overflow: hidden;
+        animation: slideUp 0.5s ease-out 0.4s both;
+      }
+      
+      .loading-progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, #22c55e, #4ade80, #22c55e);
+        background-size: 200% 100%;
+        animation: progress 1.5s ease-in-out infinite, gradient 2s linear infinite;
+        border-radius: 2px;
+      }
+      
+      @keyframes progress {
+        0% {
+          width: 0%;
+        }
+        50% {
+          width: 70%;
+        }
+        100% {
+          width: 100%;
+        }
+      }
+      
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
       }
       
       .spinner {
         width: 40px;
         height: 40px;
-        border: 3px solid #40444b;
-        border-top-color: #5865f2;
+        border: 3px solid #1a1a1a;
+        border-top-color: #22c55e;
         border-radius: 50%;
         animation: spin 1s linear infinite;
+        animation: slideUp 0.5s ease-out 0.5s both;
       }
       
       @keyframes spin {
         to { transform: rotate(360deg); }
       }
       
+      /* ========================================
+         ROOT ELEMENT STYLES
+         ======================================== */
       #root {
         display: none;
+        width: 100%;
+        height: 100%;
       }
       
       #root.loaded {
@@ -110,6 +273,9 @@
         display: none;
       }
       
+      /* ========================================
+         ERROR SCREEN STYLES
+         ======================================== */
       .error-screen {
         display: none;
         flex-direction: column;
@@ -118,49 +284,168 @@
         gap: 1rem;
         text-align: center;
         padding: 2rem;
+        max-width: 500px;
       }
       
       .error-screen.visible {
         display: flex;
+        animation: fadeIn 0.3s ease-in;
       }
       
       .error-icon {
         font-size: 64px;
         margin-bottom: 1rem;
+        animation: shake 0.5s ease-in-out;
+      }
+      
+      @keyframes shake {
+        0%, 100% {
+          transform: translateX(0);
+        }
+        10%, 30%, 50%, 70%, 90% {
+          transform: translateX(-5px);
+        }
+        20%, 40%, 60%, 80% {
+          transform: translateX(5px);
+        }
       }
       
       .error-title {
         font-size: 24px;
-        font-weight: 600;
+        font-weight: 700;
         color: #ef4444;
+        margin-bottom: 0.5rem;
       }
       
       .error-message {
         font-size: 14px;
         color: #9ca3af;
         max-width: 400px;
+        line-height: 1.6;
       }
       
-      .loading-subtext {
-        font-size: 14px;
-        color: #9ca3af;
+      .error-code {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        color: #6b7280;
+        background: #1a1a1a;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        margin-top: 1rem;
       }
       
       .retry-button {
         margin-top: 1rem;
         padding: 12px 24px;
-        background: #22c55e;
+        background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
         color: white;
         border: none;
-        border-radius: 4px;
+        border-radius: 8px;
         font-size: 14px;
         font-weight: 600;
         cursor: pointer;
-        transition: background 0.2s;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
       }
       
       .retry-button:hover {
-        background: #16a34a;
+        background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(34, 197, 94, 0.4);
+      }
+      
+      .retry-button:active {
+        transform: translateY(0);
+      }
+      
+      /* ========================================
+         NOSCRIPT STYLES
+         ======================================== */
+      .noscript-container {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: #0a0a0a;
+        color: #e0e0e0;
+        text-align: center;
+        padding: 2rem;
+        gap: 1.5rem;
+      }
+      
+      .noscript-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 32px rgba(239, 68, 68, 0.3);
+      }
+      
+      .noscript-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #ef4444;
+        margin-bottom: 0.5rem;
+      }
+      
+      .noscript-message {
+        color: #8e9297;
+        max-width: 400px;
+        line-height: 1.6;
+        font-size: 15px;
+      }
+      
+      /* ========================================
+         RESPONSIVE STYLES
+         ======================================== */
+      @media (max-width: 640px) {
+        .logo {
+          width: 80px;
+          height: 80px;
+          font-size: 24px;
+        }
+        
+        .loading-text {
+          font-size: 20px;
+        }
+        
+        .loading-subtext {
+          font-size: 13px;
+        }
+        
+        .loading-progress {
+          width: 150px;
+        }
+        
+        .error-screen {
+          padding: 1.5rem;
+        }
+        
+        .error-title {
+          font-size: 20px;
+        }
+        
+        .error-message {
+          font-size: 13px;
+        }
+      }
+      
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
       }
     </style>
   </head>
@@ -172,13 +457,15 @@
         <div class="loading-text">VertexDev Chat</div>
         <div class="loading-subtext">Loading your experience...</div>
       </div>
-      <div class="spinner"></div>
+      <div class="loading-progress">
+        <div class="loading-progress-bar"></div>
+      </div>
     </div>
     
     <!-- Error Screen -->
     <div id="error-screen" class="error-screen">
       <div class="error-icon">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
           <line x1="12" y1="9" x2="12" y2="13"/>
           <line x1="12" y1="17" x2="12.01" y2="17"/>
@@ -186,7 +473,15 @@
       </div>
       <div class="error-title">Something went wrong</div>
       <div class="error-message">Failed to load the application. Please check your internet connection and try again.</div>
-      <button class="retry-button" onclick="location.reload()">Retry</button>
+      <div class="error-code" id="error-code">Error: Unknown</div>
+      <button class="retry-button" onclick="location.reload()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 4v6h-6"/>
+          <path d="M1 20v-6h6"/>
+          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+        </svg>
+        Retry
+      </button>
     </div>
     
     <!-- React Root -->
@@ -197,26 +492,51 @@
     
     <!-- Fallback for no JavaScript -->
     <noscript>
-      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: #0a0a0a; color: #e0e0e0; text-align: center; padding: 2rem;">
-        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" style="margin-bottom: 1rem;">
-          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-          <line x1="12" y1="9" x2="12" y2="13"/>
-          <line x1="12" y1="17" x2="12.01" y2="17"/>
-        </svg>
-        <h1 style="margin-bottom: 1rem; font-size: 24px; color: #ef4444;">JavaScript Required</h1>
-        <p style="color: #8e9297; max-width: 400px;">VertexDev Chat requires JavaScript to function. Please enable JavaScript in your browser settings and reload the page.</p>
+      <div class="noscript-container">
+        <div class="noscript-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </div>
+        <h1 class="noscript-title">JavaScript Required</h1>
+        <p class="noscript-message">VertexDev Chat requires JavaScript to function. Please enable JavaScript in your browser settings and reload the page.</p>
       </div>
     </noscript>
     
     <!-- Error handling script -->
     <script>
+      // Enhanced error handling
       window.addEventListener('error', function(e) {
         console.error('Application error:', e);
         const loadingScreen = document.getElementById('loading-screen');
         const errorScreen = document.getElementById('error-screen');
+        const errorCode = document.getElementById('error-code');
         
         if (loadingScreen) loadingScreen.classList.add('hidden');
-        if (errorScreen) errorScreen.classList.add('visible');
+        if (errorScreen) {
+          errorScreen.classList.add('visible');
+          if (errorCode) {
+            errorCode.textContent = 'Error: ' + (e.message || 'Unknown error');
+          }
+        }
+      });
+      
+      // Handle unhandled promise rejections
+      window.addEventListener('unhandledrejection', function(e) {
+        console.error('Unhandled promise rejection:', e);
+        const loadingScreen = document.getElementById('loading-screen');
+        const errorScreen = document.getElementById('error-screen');
+        const errorCode = document.getElementById('error-code');
+        
+        if (loadingScreen) loadingScreen.classList.add('hidden');
+        if (errorScreen) {
+          errorScreen.classList.add('visible');
+          if (errorCode) {
+            errorCode.textContent = 'Error: ' + (e.reason?.message || 'Promise rejection');
+          }
+        }
       });
       
       // Hide loading screen when React mounts
@@ -232,8 +552,19 @@
               root.classList.add('loaded');
             }
           }
-        }, 3000); // Give React 3 seconds to load
+        }, 2000); // Give React 2 seconds to load
       });
+      
+      // Service Worker registration
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/serviceWorker.js').then(function(registration) {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, function(err) {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+        });
+      }
     </script>
   </body>
 </html>
