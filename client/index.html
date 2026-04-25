@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="LightChat - Real-time Discord-like chat application" />
+    <meta name="theme-color" content="#5865f2" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <title>VertexDev Chat - Real-time Chat</title>
+    
+    <!-- Preconnect to improve performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Meta tags for Electron -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' ws: wss: http: https:;">
+    
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: #0a0a0a;
+        color: #e0e0e0;
+        overflow: hidden;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      #loading-screen {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        animation: fadeIn 0.3s ease-in;
+      }
+      
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      
+      .logo {
+        width: 120px;
+        height: 120px;
+        background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+        border-radius: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        font-weight: bold;
+        color: white;
+        box-shadow: 0 8px 32px rgba(34, 197, 94, 0.3);
+        animation: pulse 2s ease-in-out infinite;
+      }
+      
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+      }
+      
+      .loading-text {
+        font-size: 24px;
+        font-weight: 600;
+        color: #fff;
+      }
+      
+      .loading-subtext {
+        font-size: 14px;
+        color: #8e9297;
+      }
+      
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid #40444b;
+        border-top-color: #5865f2;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+      
+      #root {
+        display: none;
+      }
+      
+      #root.loaded {
+        display: block;
+      }
+      
+      #loading-screen.hidden {
+        display: none;
+      }
+      
+      .error-screen {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        text-align: center;
+        padding: 2rem;
+      }
+      
+      .error-screen.visible {
+        display: flex;
+      }
+      
+      .error-icon {
+        font-size: 64px;
+        margin-bottom: 1rem;
+      }
+      
+      .error-title {
+        font-size: 24px;
+        font-weight: 600;
+        color: #ef4444;
+      }
+      
+      .error-message {
+        font-size: 14px;
+        color: #9ca3af;
+        max-width: 400px;
+      }
+      
+      .loading-subtext {
+        font-size: 14px;
+        color: #9ca3af;
+      }
+      
+      .retry-button {
+        margin-top: 1rem;
+        padding: 12px 24px;
+        background: #22c55e;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      
+      .retry-button:hover {
+        background: #16a34a;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+      <div class="logo">VD</div>
+      <div>
+        <div class="loading-text">VertexDev Chat</div>
+        <div class="loading-subtext">Loading your experience...</div>
+      </div>
+      <div class="spinner"></div>
+    </div>
+    
+    <!-- Error Screen -->
+    <div id="error-screen" class="error-screen">
+      <div class="error-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+      </div>
+      <div class="error-title">Something went wrong</div>
+      <div class="error-message">Failed to load the application. Please check your internet connection and try again.</div>
+      <button class="retry-button" onclick="location.reload()">Retry</button>
+    </div>
+    
+    <!-- React Root -->
+    <div id="root"></div>
+    
+    <!-- Main Script -->
+    <script type="module" src="/src/main.jsx"></script>
+    
+    <!-- Fallback for no JavaScript -->
+    <noscript>
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: #0a0a0a; color: #e0e0e0; text-align: center; padding: 2rem;">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" style="margin-bottom: 1rem;">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        <h1 style="margin-bottom: 1rem; font-size: 24px; color: #ef4444;">JavaScript Required</h1>
+        <p style="color: #8e9297; max-width: 400px;">VertexDev Chat requires JavaScript to function. Please enable JavaScript in your browser settings and reload the page.</p>
+      </div>
+    </noscript>
+    
+    <!-- Error handling script -->
+    <script>
+      window.addEventListener('error', function(e) {
+        console.error('Application error:', e);
+        const loadingScreen = document.getElementById('loading-screen');
+        const errorScreen = document.getElementById('error-screen');
+        
+        if (loadingScreen) loadingScreen.classList.add('hidden');
+        if (errorScreen) errorScreen.classList.add('visible');
+      });
+      
+      // Hide loading screen when React mounts
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          const loadingScreen = document.getElementById('loading-screen');
+          const root = document.getElementById('root');
+          
+          if (loadingScreen && root) {
+            // Check if React has rendered
+            if (root.children.length > 0) {
+              loadingScreen.classList.add('hidden');
+              root.classList.add('loaded');
+            }
+          }
+        }, 3000); // Give React 3 seconds to load
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+appId: com.lightchat.app
+productName: LightChat
+directories:
+  output: dist
+  buildResources: assets
+files:
+  - electron/**/*
+  - server/**/*
+  - client/dist/**/*
+  - package.json
+win:
+  target:
+    - nsis
+    - portable
+  icon: assets/icon.ico
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  installerIcon: assets/icon.ico
+  uninstallerIcon: assets/icon.ico
