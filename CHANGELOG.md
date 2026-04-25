@@ -90,7 +90,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SSL/HTTPS setup support
 - Comprehensive deployment documentation
 - Quick start guide
-- GitHub setup instructions
 
 ### Documentation
 - README.md with project overview and features
